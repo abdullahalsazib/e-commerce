@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - RedStore</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2dadd974fe.js" crossorigin="anonymous"></script>
+    <style>
+        .cart-page {
+            margin: 80px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cart-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        th {
+            text-align: left;
+            padding: 5px;
+            color: #fff;
+            background: #ff523b;
+            font-weight: normal;
+        }
+
+        td {
+            padding: 10px 5px;
+        }
+
+        td input {
+            width: 40px;
+            height: 30px;
+            padding: 5px;
+        }
+
+        td a {
+            color: #ff523b;
+            font-size: 12px;
+        }
+
+        td img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .total-price table {
+            border-top: 3px solid #ff523b;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        td:last-child {
+            text-align: right;
+        }
+
+        th:last-child {
+            text-align: right;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-cart h2 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart p {
+            color: #777;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </div>
+                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <div class="small-container cart-page">
+        <table id="cartTable">
+            <!-- Cart items will be loaded by JavaScript -->
+        </table>
+
+        <div class="total-price" id="totalPriceSection">
+            <!-- Total price will be calculated by JavaScript -->
+        </div>
+    </div>
+
+    <!--------Footer--------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone..</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png">
+                        <img src="images/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="images/logo-white.png">
+                    <p>Our Purchase Is Sustainably Make The Pleasure And Benefits Of Sports Accessible To The Many....
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2022</p>
+        </div>
+    </div>
+
+    <script>
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartTable = document.getElementById('cartTable');
+            const totalPriceSection = document.getElementById('totalPriceSection');
+
+            if (cart.length === 0) {
+                cartTable.innerHTML = `
+               <tr>
+                  <td colspan="5">
+                     <div class="empty-cart">
+                        <h2>Your cart is empty</h2>
+                        <p>Add some products to your cart to continue shopping.</p>
+                        <a href="product.html" class="btn">Continue Shopping</a>
+                     </div>
+                  </td>
+               </tr>
+            `;
+                totalPriceSection.innerHTML = '';
+                return;
+            }
+
+            let tableHTML = `
+            <tr>
+               <th>Product</th>
+               <th>Quantity</th>
+               <th>Size</th>
+               <th>Subtotal</th>
+               <th>Action</th>
+            </tr>
+         `;
+
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+
+                tableHTML += `
+               <tr>
+                  <td>
+                     <div class="cart-info">
+                        <img src="${item.image}">
+                        <div>
+                           <p>${item.name}</p>
+                           <small>Price: $${item.price.toFixed(2)}</small>
+                        </div>
+                     </div>
+                  </td>
+                  <td><input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)"></td>
+                  <td>${item.size}</td>
+                  <td>$${subtotal.toFixed(2)}</td>
+                  <td><a href="#" onclick="removeItem(${index})">Remove</a></td>
+               </tr>
+            `;
+            });
+
+            cartTable.innerHTML = tableHTML;
+
+            totalPriceSection.innerHTML = `
+            <table>
+               <tr>
+                  <td>Subtotal</td>
+                  <td>$${total.toFixed(2)}</td>
+               </tr>
+               <tr>
+                  <td>Tax</td>
+                  <td>$${(total * 0.1).toFixed(2)}</td>
+               </tr>
+               <tr>
+                  <td>Total</td>
+                  <td>$${(total * 1.1).toFixed(2)}</td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <a href="product.html" class="btn" style="display: inline-block; margin-top: 10px;">Continue Shopping</a>
+                     <button class="btn" onclick="checkout()" style="display: inline-block; margin-top: 10px; margin-left: 10px;">Checkout</button>
+                  </td>
+               </tr>
+            </table>
+         `;
+        }
+
+        function updateQuantity(index, quantity) {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (cart[index] && quantity > 0) {
+                cart[index].quantity = parseInt(quantity);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+                // Update cart count on all pages
+                if (typeof updateCartCount === 'function') {
+                    updateCartCount();
+                }
+            }
+        }
+
+        function removeItem(index) {
+            if (confirm('Are you sure you want to remove this item?')) {
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCart();
+                // Update cart count on all pages
+                if (typeof updateCartCount === 'function') {
+                    updateCartCount();
+                }
+            }
+        }
+
+        function checkout() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+
+            if (!currentUser) {
+                if (confirm('You need to be logged in to checkout. Would you like to login?')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            const order = {
+                id: Date.now(),
+                email: currentUser.email,
+                items: cart,
+                total: total * 1.1, // Including tax
+                date: new Date().toISOString(),
+                status: 'Processing'
+            };
+
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('cart', '[]'); // Clear cart
+
+            alert('Order placed successfully! Thank you for your purchase.');
+            window.location.href = 'account.html';
+        }
+
+        // Load cart on page load
+        window.addEventListener('DOMContentLoaded', function () {
+            loadCart();
+            if (typeof updateCartCount === 'function') {
+                updateCartCount();
+            }
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

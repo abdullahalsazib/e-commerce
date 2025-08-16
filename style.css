@@ -348,6 +348,27 @@ margin-left: 10px;
 
 
 
+/* Cart Badge */
+.cart-container {
+  position: relative;
+  display: inline-block;
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff523b;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 @media only screen and (max-width: 600px){
  .row{
   text-align: center

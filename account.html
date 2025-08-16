@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - RedStore</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2dadd974fe.js" crossorigin="anonymous"></script>
+    <style>
+        .account-page {
+            padding: 80px 0;
+            background: radial-gradient(#fff, #ffd6d6);
+        }
+
+        .account-info {
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .account-info h2 {
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item label {
+            display: block;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            color: #555;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .order-history {
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .order-item {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .order-item h4 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .order-item p {
+            color: #777;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+        }
+
+        .login-prompt {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .login-prompt h2 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .login-prompt p {
+            color: #777;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </div>
+                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <div class="account-page">
+        <div class="container">
+            <div id="accountContent">
+                <!-- Content will be loaded by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!--------Footer--------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone..</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png">
+                        <img src="images/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="images/logo-white.png">
+                    <p>Our Purchase Is Sustainably Make The Pleasure And Benefits Of Sports Accessible To The Many....
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2022</p>
+        </div>
+    </div>
+
+    <script>
+        function loadAccountPage() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const accountContent = document.getElementById('accountContent');
+
+            if (!currentUser) {
+                accountContent.innerHTML = `
+               <div class="login-prompt">
+                  <h2>Please Login</h2>
+                  <p>You need to be logged in to view your account.</p>
+                  <a href="login.html" class="btn">Login / Sign Up</a>
+               </div>
+            `;
+                return;
+            }
+
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]').filter(o => o.email === currentUser.email);
+
+            accountContent.innerHTML = `
+            <div class="row">
+               <div class="col-2">
+                  <div class="account-info">
+                     <h2>Account Information</h2>
+                     <div class="info-item">
+                        <label>Name</label>
+                        <p>${currentUser.name}</p>
+                     </div>
+                     <div class="info-item">
+                        <label>Email</label>
+                        <p>${currentUser.email}</p>
+                     </div>
+                     <div class="info-item">
+                        <label>Member Since</label>
+                        <p>${new Date(currentUser.date).toLocaleDateString()}</p>
+                     </div>
+                     <div class="account-actions">
+                        <a href="login.html" class="btn" onclick="logout()">Logout</a>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-2">
+                  <div class="order-history">
+                     <h2>Order History</h2>
+                     ${orders.length > 0 ? orders.map(order => `
+                        <div class="order-item">
+                           <h4>Order #${order.id}</h4>
+                           <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+                           <p><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+                           <p><strong>Items:</strong> ${order.items.length} item(s)</p>
+                           <p><strong>Status:</strong> ${order.status || 'Processing'}</p>
+                        </div>
+                     `).join('') : '<div class="no-orders"><p>No orders yet. Start shopping!</p><a href="product.html" class="btn">Browse Products</a></div>'}
+                  </div>
+               </div>
+            </div>
+         `;
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Load account page on page load
+        window.addEventListener('DOMContentLoaded', loadAccountPage);
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

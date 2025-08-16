@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RedStore</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2dadd974fe.js" crossorigin="anonymous"></script>
+    <style>
+        .account-page {
+            padding: 80px 0;
+            background: radial-gradient(#fff, #ffd6d6);
+        }
+
+        .form-container {
+            background: #fff;
+            width: 300px;
+            min-height: 450px;
+            position: relative;
+            text-align: center;
+            padding: 20px 0;
+            margin: auto;
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .form-container span {
+            font-weight: bold;
+            padding: 0 10px;
+            color: #555;
+            cursor: pointer;
+            width: 100px;
+            display: inline-block;
+        }
+
+        .form-btn {
+            display: inline-block;
+        }
+
+        .form-container form {
+            max-width: 300px;
+            padding: 0 20px;
+            position: absolute;
+            top: 130px;
+            width: 100%;
+            transition: transform 1s;
+        }
+
+        .form-container form input {
+            width: calc(100% - 20px);
+            height: 35px;
+            margin: 10px 0;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-container form input:focus {
+            outline: none;
+            border-color: #ff523b;
+        }
+
+        .form-container .btn {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-container .btn:hover {
+            background: #563434;
+        }
+
+        .form-container form a {
+            font-size: 12px;
+            color: #555;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .form-container form a:hover {
+            color: #ff523b;
+        }
+
+        #LoginForm {
+            left: 0;
+        }
+
+        #RegForm {
+            left: 300px;
+        }
+
+        .form-container .form-btn {
+            width: 220px;
+            margin: 35px auto;
+            position: relative;
+            box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            background: #f0f0f0;
+            padding: 5px;
+        }
+
+        .form-container .form-btn span {
+            font-weight: bold;
+            padding: 8px 10px;
+            color: #555;
+            cursor: pointer;
+            width: 100px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .form-container .form-btn span:hover {
+            color: #ff523b;
+        }
+
+        .form-container .form-btn::after {
+            content: '';
+            width: 110px;
+            height: 100%;
+            background: #ff523b;
+            border-radius: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: transform 0.5s;
+        }
+
+        #Indicator {
+            width: 110px;
+            border: none;
+            background: #ff523b;
+            height: 3px;
+            margin-top: 8px;
+            transform: translateX(0px);
+            transition: transform 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="images/logo.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="product.html">Products</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-container">
+                    <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+                    <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+                </div>
+                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="images/image1.png" width="100%">
+                </div>
+                <div class="col-2">
+                    <div class="form-container">
+                        <div class="form-btn">
+                            <span onclick="login()">Login</span>
+                            <span onclick="register()">Register</span>
+                            <hr id="Indicator">
+                        </div>
+
+                        <form id="LoginForm" onsubmit="handleLogin(event)">
+                            <input type="email" placeholder="Email" required>
+                            <input type="password" placeholder="Password" required>
+                            <button type="submit" class="btn">Login</button>
+                            <a href="#">Forgot password</a>
+                        </form>
+
+                        <form id="RegForm" onsubmit="handleRegister(event)">
+                            <input type="text" id="regName" placeholder="Name" required>
+                            <input type="email" id="regEmail" placeholder="Email" required>
+                            <input type="password" id="regPassword" placeholder="Password" required>
+                            <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                            <button type="submit" class="btn">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--------Footer--------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone..</p>
+                    <div class="app-logo">
+                        <img src="images/play-store.png">
+                        <img src="images/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="images/logo-white.png">
+                    <p>Our Purchase Is Sustainably Make The Pleasure And Benefits Of Sports Accessible To The Many....
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2022</p>
+        </div>
+    </div>
+
+    <script>
+        var LoginForm = document.getElementById("LoginForm");
+        var RegForm = document.getElementById("RegForm");
+        var Indicator = document.getElementById("Indicator");
+
+        // Initialize - show login form by default
+        window.addEventListener('DOMContentLoaded', function () {
+            if (LoginForm && RegForm && Indicator) {
+                LoginForm.style.transform = "translateX(0px)";
+                RegForm.style.transform = "translateX(300px)";
+                Indicator.style.transform = "translateX(0px)";
+            }
+        });
+
+        function register() {
+            if (RegForm && LoginForm && Indicator) {
+                RegForm.style.transform = "translateX(0px)";
+                LoginForm.style.transform = "translateX(-300px)";
+                Indicator.style.transform = "translateX(110px)";
+            }
+        }
+
+        function login() {
+            if (RegForm && LoginForm && Indicator) {
+                RegForm.style.transform = "translateX(300px)";
+                LoginForm.style.transform = "translateX(0px)";
+                Indicator.style.transform = "translateX(0px)";
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = event.target[0].value.trim();
+            const password = event.target[1].value;
+
+            if (!email || !password) {
+                alert('Please fill in all fields!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('Login successful!');
+                window.location.href = 'account.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+            // Validation
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields!');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long!');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            if (users.find(u => u.email === email)) {
+                alert('Email already registered!');
+                return;
+            }
+
+            const newUser = {
+                name: name,
+                email: email,
+                password: password,
+                date: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+            alert('Registration successful! You are now logged in.');
+            window.location.href = 'account.html';
+        }
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>

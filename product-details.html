@@ -6,7 +6,7 @@
    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title>All Products -RedStore</title>
+   <title>Product Details - RedStore</title>
 
    <link rel="stylesheet" href="style.css">
    <script src="https://kit.fontawesome.com/2dadd974fe.js" crossorigin="anonymous"></script>
@@ -36,138 +36,45 @@
          <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
       </div>
    </div>
+   <!------Single product details------------->
+   <div class="small-container single-product">
+      <div class="row">
+         <div class="col-2">
+            <img src="images/gallery-1.jpg" alt="">
+         </div>
+         <div class="col-2">
+            <p>Home / T-Shirt</p>
+            <h1>Red Printd T-Shirt By AAS</h1>
+            <h4 id="productPrice">$50.00</h4>
+            <select id="productSize">
+               <option>Select size</option>
+               <option>XXL</option>
+               <option>XL</option>
+               <option>Large</option>
+               <option>Medium</option>
+               <option>Small</option>
+            </select>
+            <input type="number" id="productQuantity" value="1" min="1">
+            <button class="btn" onclick="addToCart()">Add to Cart</button>
+            <h3>Products Details <i class="fa fa-indent"></i></h3>
+            <p>Lorem Ipsum is simple dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+               industry's standard dummy text eve</p>
+         </div>
+      </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
 
    <div class="small-container">
-      <div class="row row-2">
-         <h2>All Products</h2>
-         <select>
-            <option>Default Shorting</option>
-            <option>Short by price</option>
-            <option>Short by popularity</option>
-            <option>Short by rating</option>
-            <option>Short by sale</option>
-         </select>
-      </div>
-
-
-      <div class="row">
-         <div class="col-4">
-            <a href="product-details.html?id=1"><img src="images/product-1.jpg"></a>
-            <a href="product-details.html?id=1">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=2"><img src="images/product-2.jpg"></a>
-            <a href="product-details.html?id=2">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=3"><img src="images/product-3.jpg"></a>
-            <a href="product-details.html?id=3">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=4"><img src="images/product-4.jpg"></a>
-            <a href="product-details.html?id=4">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-      </div>
-
-
-      <div class="row">
-         <div class="col-4">
-            <a href="product-details.html?id=5"><img src="images/product-5.jpg"></a>
-            <a href="product-details.html?id=5">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=6"><img src="images/product-6.jpg"></a>
-            <a href="product-details.html?id=6">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=7"><img src="images/product-7.jpg"></a>
-            <a href="product-details.html?id=7">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-         <div class="col-4">
-            <a href="product-details.html?id=8"><img src="images/product-8.jpg"></a>
-            <a href="product-details.html?id=8">
-               <h4>Red printed T-shirt</h4>
-            </a>
-            <div class="rating">
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-o"></i>
-            </div>
-            <p>$50.00</p>
-         </div>
-      </div>
+      <h2 class="title" style="margin-top: 80px;">Related Products</h2>
       <div class="row">
          <div class="col-4">
             <a href="product-details.html?id=9"><img src="images/product-9.jpg"></a>
@@ -226,12 +133,9 @@
             <p>$50.00</p>
          </div>
       </div>
-      <div class="page-btn">
-         <span>1</span>
-         <span><a href="product-details.html">2</a></span>
-         <span>&#8594;</span>
-      </div>
    </div>
+
+
    <!--------Footer--------->
    <div class="footer">
       <div class="container">
@@ -275,6 +179,72 @@
 
 
 
+   <script>
+      // Get product ID from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id') || '1';
+
+      // Product data (in a real app, this would come from a database)
+      const products = {
+         1: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-1.jpg' },
+         2: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-2.jpg' },
+         3: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-3.jpg' },
+         4: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-4.jpg' },
+         5: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-5.jpg' },
+         6: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-6.jpg' },
+         7: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-7.jpg' },
+         8: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-8.jpg' },
+         9: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-9.jpg' },
+         10: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-10.jpg' },
+         11: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-11.jpg' },
+         12: { name: 'Red Printed T-Shirt', price: 50.00, image: 'images/product-12.jpg' }
+      };
+
+      // Update product details based on ID
+      if (products[productId]) {
+         const product = products[productId];
+         document.querySelector('h1').textContent = product.name;
+         document.getElementById('productPrice').textContent = '$' + product.price.toFixed(2);
+         document.querySelector('.col-2 img').src = product.image;
+      }
+
+      function addToCart() {
+         const size = document.getElementById('productSize').value;
+         const quantity = parseInt(document.getElementById('productQuantity').value);
+
+         if (size === 'Select size') {
+            alert('Please select a size');
+            return;
+         }
+
+         const product = products[productId];
+         const cartItem = {
+            id: productId,
+            name: product.name,
+            price: product.price,
+            size: size,
+            quantity: quantity,
+            image: product.image
+         };
+
+         let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+         cart.push(cartItem);
+         localStorage.setItem('cart', JSON.stringify(cart));
+
+         alert('Product added to cart!');
+         // Update cart count using main.js function
+         if (typeof updateCartCount === 'function') {
+            updateCartCount();
+         }
+      }
+
+      // Update cart count on page load
+      window.addEventListener('DOMContentLoaded', function () {
+         if (typeof updateCartCount === 'function') {
+            updateCartCount();
+         }
+      });
+   </script>
    <script src="main.js"></script>
 </body>
 
